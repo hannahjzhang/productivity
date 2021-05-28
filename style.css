@@ -26,7 +26,7 @@ body {
   border-radius: 10px;
   min-height: 640px;
   height: 100%;
-  margin: 25px 3% 25px 3%; /* top right bottom left */
+  margin: 3% 30px 3% 30px; /* top right bottom left */
   box-shadow: 7px 7px #4d79d1;
 }
 .main-columns .row:after {

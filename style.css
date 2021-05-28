@@ -1,0 +1,381 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap');
+
+/* setting the page background */
+/* body {
+  background-image: url("images/bkgd5.jpeg");
+} */
+body {
+  background-color: white;
+  background: linear-gradient(to bottom, #59b0f7 0%, #4dd1e3 100%);
+  height: 100vh;
+  overflow: auto;
+  font-family: 'Poppins', sans-serif;
+}
+.page-container {
+  margin: 10px 10px 10px 10px;
+}
+
+/* dividing the page into three main columns */
+.main-columns {
+  color: black;
+}
+.main-columns .column {
+  background-color: aliceblue;
+  float: left;
+  width: 29%;
+  border-radius: 10px;
+  min-height: 640px;
+  height: 100%;
+  margin: 25px 30px 25px 30px; /* top right bottom left */
+  box-shadow: 7px 7px #4d79d1;
+}
+.main-columns .row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+@media screen and (max-width: 700px) {
+  .main-columns .column {
+    width: 87%;
+  }
+}
+
+/* column headers & labels */
+.main-columns h1 {
+  color: black;
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* pomodoro timer */
+.pomodoro-container {
+  border: 0px solid #333;
+  border-radius: 20px;
+  width: 85%;
+  margin: 10px auto;
+  margin-top: 0px;
+  padding: 10px 10px 10px 10px;
+  text-align: center;
+  background: #eee;
+}
+.pomodoro-container .second {
+  background: white;
+  border-radius: 20px;
+  padding: 10px 0px 0px 0px;
+}
+.column h3 {
+  text-align: center;
+  color: #815382;
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+/* changing time part */
+.pomodoro-container .timer { 
+  color: #4d79d1; 
+  font-family: 'Poppins', sans-serif;
+  font-size: 35px; 
+  margin: 0px auto;
+  border: 4px solid #4d79d1;
+  border-radius: 50%;
+  width: 135px;
+  height: 135px;
+  overflow: hidden;
+  position: relative;
+  cursor: default;
+  background-color: #e9ecf7;
+}
+.pomodoro-container .timer .time {
+  margin-top: 31%;
+  z-index: 1;
+  position: relative;
+}
+/* pomodoro buttons */
+.pomodoro-container .buttons button { 
+  background: #566675; 
+  border: none; 
+  color: white;
+  padding: 5px; 
+  width: 70px; 
+  margin: 10px auto;
+  margin-left: 4px;
+  margin-right: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  border-radius: 10px;
+}
+.pomodoro-container .buttons button:hover { 
+  cursor: pointer;
+  background: #ac78ad;
+  color: white;
+  transform: scale(1.05);
+}
+
+hr {
+  width: 90%;
+}
+
+/* to-do list */
+.to-do-list {
+  border: 0px solid #333;
+  border-radius: 20px;
+  width: 85%;
+  margin: 10px auto;
+  margin-top: 0px;
+  padding: 10px 10px 10px 10px;
+  text-align: center;
+  background: #eee;
+}
+/* include the padding and border in an element's total width and height */
+.to-do-list * {
+  box-sizing: border-box;
+}
+/* remove margins and padding from the list */
+.to-do-list ul {
+  margin: 0;
+  padding: 0;
+}
+/* list items */
+.to-do-list ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 10px 30px 10px 40px; /* top right bottom left */
+  list-style-type: none;
+  background: #e9ecf7;
+  font-size: 14px;
+  transition: 0.1s;
+  text-align: left;
+  /* make the list items unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.to-do-list ul li:nth-child(odd) {
+  background: white;
+}
+.to-do-list ul li:last-child {
+  border-radius: 0px 0px 10px 10px; /* top top bottom bottom */
+}
+.to-do-list ul li:hover {
+  background: #ddd;
+}
+/* when clicked on, add a background color and strike out text */
+.to-do-list ul li.checked {
+  background: #888;
+  color: #fff;
+  text-decoration: line-through;
+}
+/* add a "checked" mark when clicked on */
+.to-do-list ul li.checked::before {
+  content: '';
+  position: absolute;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+/* close button */
+.to-do-list .close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 41px;
+  padding: 12px 16px 12px 16px;
+}
+.to-do-list .close:hover {
+  background-color: #ac78ad;
+  color: white;
+}
+/* header of list */
+.to-do-list .header {
+  background-color: #4d79d1;
+  padding: 10px 20px;
+  color: white;
+  text-align: center;
+  border-radius: 20px 20px 0px 0px;
+}
+.to-do-list .header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* input */
+.to-do-list input {
+  margin: 0;
+  border: none;
+  border-radius: 10px 0px 0px 10px;
+  width: 75%;
+  padding: 10px;
+  padding-left: 20px;
+  float: left;
+  font-size: 14px;
+}
+.to-do-list input::placeholder {
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  padding-left: 0px;
+}
+/* "add" button */
+.to-do-list .addBtn {
+  padding: 8px 5px 5px 5px; /* top right bottom left */
+  height: 36px;
+  width: 25%;
+  background: #566675;
+  color: white;
+  float: left;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 0px 10px 10px 0px;
+}
+.to-do-list .addBtn:hover {
+  background-color: #ac78ad;
+}
+
+/* relax section links */
+.relax-section {
+  border: 0px solid #333;
+  border-radius: 20px;
+  width: 85%;
+  margin: 10px auto;
+  margin-top: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+  background: #eee;
+}
+/* buttons */
+.relax-section a.button-link1 {
+  display: inline-block;
+  padding: 10px 10px 10px 10px; /* top right bottom left */
+  margin: 7px 10px 7px 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family:'Poppins', sans-serif;
+  font-weight: 400;
+  color: #FFFFFF;
+  background-color: #c39bc7;
+  box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+  text-align: left;
+  position: relative;
+  width: 92%;
+}
+.relax-section a.button-link1:active{
+  top: 0.1em;
+}
+.relax-section a.button-link2 {
+  display: inline-block;
+  padding: 10px 10px 10px 10px; /* top right bottom left */
+  margin: 7px 10px 7px 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family:'Poppins', sans-serif;
+  font-weight: 400;
+  color: #FFFFFF;
+  background-color: #9a93c4;
+  box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+  text-align: left;
+  position: relative;
+  width: 92%;
+}
+.relax-section a.button-link2:active{
+  top: 0.1em;
+}
+.relax-section a.button-link3 {
+  display: inline-block;
+  padding: 10px 10px 10px 10px; /* top right bottom left */
+  margin: 7px 10px 7px 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family:'Poppins', sans-serif;
+  font-weight: 400;
+  color: #FFFFFF;
+  background-color: #87a2c4;
+  box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+  text-align: left;
+  position: relative;
+  width: 92%;
+}
+.relax-section a.button-link3:active{
+  top: 0.1em;
+}
+.relax-section span {
+  border-right: 1px solid;
+  color: white;
+  margin-right: 10px;
+}
+.relax-section img {
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+  margin-left: 10px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+/* random health tip generator */
+.health-tip {
+  border: 0px solid #333;
+  border-radius: 20px;
+  width: 85%;
+  margin: 10px auto;
+  margin-top: 0px;
+  padding: 10px 10px 10px 10px;
+  text-align: left;
+  background: #eee;
+}
+.health-tip .second {
+  background: white;
+  border-radius: 20px;
+  padding: 3px 10px 3px 10px;
+}
+
+/* ai phone tracker */
+.ai-container {
+  border: 0px solid #333;
+  border-radius: 20px;
+  width: 85%;
+  margin: 10px auto;
+  margin-top: 0px;
+  padding: 10px 10px 10px 10px;
+  text-align: left;
+  background: #eee;
+  display: grid;
+  justify-content: center;
+}
+.ai-container button {
+  padding: 10px 10px 10px 10px; /* top right bottom left */
+  margin: 7px 10px 7px 10px;
+  border-radius: 10px;
+  border: 0px;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family:'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #FFFFFF;
+  background-color: #c39bc7;
+  box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+  text-align: center;
+  position: relative;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.ai-container button:hover {
+  cursor: pointer;
+}
+.ai-container button:active {
+  top: 0.1em;
+}
+.ai-container * {
+  font-size: 14px;
+  text-align: center;
+}

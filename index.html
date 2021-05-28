@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>productivity helper</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="images/computer.png"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <script src="script.js"></script>
+    <div class="page-container">
+      <div class="main-columns">
+        <div class="row">
+          <div class="column">
+            <h1>reminders</h1>
+            <hr>
+            <h3>health reminders</h3>
+            <div class="health-tip">
+              <div class="second">
+                <ol>
+                  <li>take a walk</li>
+                  <li>rest your eyes</li>
+                </ol> 
+              </div>
+            </div>
+            <h3>phone tracker</h3>
+            <div class="ai-container">
+              <button type="button" onclick="init()">start</button>
+              <div id="webcam-container"></div>
+              <div id="label-container"></div>
+              <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+              <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+              <script type="text/javascript">
+                // More API functions here:
+                // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+
+                // the link to your model provided by Teachable Machine export panel
+                const URL = "https://teachablemachine.withgoogle.com/models/jjKWR4gFr/";
+
+                let model, webcam, labelContainer, maxPredictions;
+
+                // Load the image model and setup the webcam
+                async function init() {
+                  const modelURL = URL + "model.json";
+                  const metadataURL = URL + "metadata.json";
+
+                  // load the model and metadata
+                  // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+                  // or files from your local hard drive
+                  // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+                  model = await tmImage.load(modelURL, metadataURL);
+                  maxPredictions = model.getTotalClasses();
+
+                  // Convenience function to setup a webcam
+                  const flip = true; // whether to flip the webcam
+                  webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
+                  await webcam.setup(); // request access to the webcam
+                  await webcam.play();
+                  window.requestAnimationFrame(loop);
+
+                  // append elements to the DOM
+                  document.getElementById("webcam-container").appendChild(webcam.canvas);
+                  labelContainer = document.getElementById("label-container");
+                  for (let i = 0; i < maxPredictions; i++) { // and class labels
+                      labelContainer.appendChild(document.createElement("div"));
+                  }
+                }
+
+                async function loop() {
+                  webcam.update(); // update the webcam frame
+                  await predict();
+                  window.requestAnimationFrame(loop);
+                }
+
+                // run the webcam image through the image model
+                async function predict() {
+                  // predict can take in an image, video or canvas html element
+                  const prediction = await model.predict(webcam.canvas);
+                  for (let i = 0; i < maxPredictions; i++) {
+                      const classPrediction =
+                          prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+                      labelContainer.childNodes[i].innerHTML = classPrediction;
+                  }
+                }
+              </script>
+            </div>
+          </div>
+          <div class="column">
+            <h1>work</h1>
+            <hr>
+            <!-- pomodoro timer -->
+            <h3>pomodoro timer</h3>
+            <div class="pomodoro-container">
+              <div class="second">
+                <div class="timer">
+                  <div class="time">
+                    <span id="minutes">25</span>
+                    <span id="colon">:</span>
+                    <span id="seconds">00</span>
+                  </div>
+                </div>
+                <div class="buttons">
+                  <button id="work">work</button>
+                  <button id="shortBreak">short</button>
+                  <button id="longBreak">long</button>
+                  <button id="stop">stop</button>
+                </div>
+              </div>
+            </div>
+            <!-- checklist -->
+            <h3>to-do-list</h3>
+            <div class="to-do-list">
+              <div id="myDIV" class="header">
+                <!-- <h2>to do list</h2> -->
+                <input type="text" id="myInput" placeholder="title...">
+                <span onclick="newElement()" class="addBtn">add</span>
+              </div>
+              <ul id="myUL">
+                <li>placeholder</li>
+                <!-- <li class="checked">pack lunch</li> -->
+              </ul>
+            </div>
+          </div>
+          <div class="column">
+            <h1>relax</h1>
+            <hr>
+            <h3>games</h3>
+            <div class="relax-section">
+              <!-- links to entertaining games -->
+              <a href="https://hannahjzhang.github.io/cubeplace/" class="button-link1" target="_blank">
+                <span><img src="images/cube.png"></span>
+                cubeplace
+              </a>
+              <a href="https://play2048.co/" class="button-link1" target="_blank">
+                <span><img src="images/tile.png"></span>
+                twenty fourty eight
+              </a>
+              <a href="https://flappybird.io/" class="button-link1" target="_blank">
+                <span><img src="images/bird.png"></span>
+                flappy bird
+              </a>
+            </div>
+            <h3>quirky sites</h3>
+            <div class="relax-section">
+              <!-- links to quirky sites -->
+              <a href="https://www.boredbutton.com/" class="button-link2" target="_blank">
+                <span><img src="images/button.png"></span>
+                bored button
+              </a>
+              <a href="https://quickdraw.withgoogle.com/" class="button-link2" target="_blank">
+                <span><img src="images/draw.png"></span>
+                teach google to draw
+              </a>
+            </div>
+            <h3>fun videos</h3>
+            <div class="relax-section">
+              <!-- links to fun videos -->
+              <a href="https://www.youtube.com/watch?v=hY7m5jjJ9mM" class="button-link3" target="_blank">
+                <span><img src="images/cat.png"></span>
+                funny cat clips
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
